@@ -80,10 +80,7 @@ stages {
 				cd charts
                 cp castservice/values.yaml values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                cat values.yml
-				echo ********************
-				pwd
-				echo *********************                
+                cat values.yml          
 				helm upgrade --install app ./castservice --values=values.yml --namespace dev
                 cp movieservice/values.yaml values.yml
                 cat values.yml
@@ -106,13 +103,15 @@ stages {
                 mkdir .kube
                 ls
                 cat $KUBECONFIG > .kube/config
-                cp charts/castservice/values.yaml values.yml
+				cd charts
+                cp castservice/values.yaml values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app castservice --values=values.yml --namespace qa
-                cp charts/movieservice/values.yaml values.yml
+                cat values.yml          
+				helm upgrade --install app ./castservice --values=values.yml --namespace qa
+                cp movieservice/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app movieservice --values=values.yml --namespace qa
+                helm upgrade --install app ./movieservice --values=values.yml --namespace qa
                 '''
                 }
             }
@@ -130,14 +129,15 @@ stages {
                 mkdir .kube
                 ls
                 cat $KUBECONFIG > .kube/config
-                cp charts/castservice/values.yaml values.yml
+				cd charts
+                cp castservice/values.yaml values.yml
+                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                cat values.yml          
+				helm upgrade --install app ./castservice --values=values.yml --namespace staging
+                cp movieservice/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app castservice --values=values.yml --namespace staging
-                cp charts/movieservice/values.yaml values.yml
-                cat values.yml
-                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app movieservice --values=values.yml --namespace staging
+                helm upgrade --install app ./movieservice --values=values.yml --namespace staging
                 '''
                 }
             }
@@ -161,14 +161,15 @@ stages {
                 mkdir .kube
                 ls
                 cat $KUBECONFIG > .kube/config
-                cp charts/castservice/values.yaml values.yml
+				cd charts
+                cp castservice/values.yaml values.yml
+                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                cat values.yml          
+				helm upgrade --install app ./castservice --values=values.yml --namespace prod
+                cp movieservice/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app castservice --values=values.yml --namespace prod
-                cp charts/movieservice/values.yaml values.yml
-                cat values.yml
-                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app movieservice --values=values.yml --namespace prod
+                helm upgrade --install app ./movieservice --values=values.yml --namespace prod
                 '''
                 }
             }
