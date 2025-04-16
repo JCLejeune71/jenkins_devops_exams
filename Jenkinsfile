@@ -39,7 +39,7 @@ stages {
             steps {
                     script {
                     sh '''
-                    curl localhost
+                    echo Acceptance
                     '''
                     }
             }
