@@ -2,6 +2,8 @@ pipeline {
 environment { 
 DOCKER_ID = "jclejeune71" 
 DOCKER_IMAGE = "jenkins_devops_exams"
+DOCKER_IMAGE_CAST = "cast-service"
+DOCKER_IMAGE_MOVIE = "movie-service"
 DOCKER_TAG = "v.${BUILD_ID}.0" 
 }
 agent any // Jenkins will be able to select all available agents
@@ -11,7 +13,8 @@ stages {
                 script {
                 sh '''
                  docker rm -f jenkins
-                 docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG .
+                 docker build -t $DOCKER_ID/$DOCKER_CAST:$DOCKER_TAG ./cast-service
+                 docker build -t $DOCKER_ID/$DOCKER_MOVIE:$DOCKER_TAG ./movie-service				 
                 sleep 6
                 '''
                 }
@@ -149,3 +152,4 @@ stage('Deploiement en staging'){
 
 }
 }
+
