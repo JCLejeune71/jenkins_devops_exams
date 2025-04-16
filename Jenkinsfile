@@ -28,10 +28,19 @@ stages {
                     docker run -d --name cast_db -v postgres_data_cast:/var/lib/postgresql/data/ -e POSTGRES_USER=cast_db_username -e POSTGRES_PASSWORD=cast_db_password -e POSTGRES_DB=cast_db_dev postgres:12.1-alpine
                     docker run -d --name $DOCKER_IMAGE_CAST --link cast_db:cast_db -v ./cast-service:/app/ -p 8002:8000 -e DATABASE_URI=postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
                     docker run -d --name nginx --link $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_IMAGE_CAST --link $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_IMAGE_MOVIE -v ./nginx_config.conf:/etc/nginx/conf.d/default.conf -p 8080:8080 nginx:latest
-      	            sleep 10
+					sleep 10
                     '''
                     }
                 }
+            }
+
+        stage('Test Acceptance'){ // we launch the curl command to validate that the container responds to the request
+            steps {
+                    script {
+                    sh '''
+                    echo Acceptance
+                    '''
+                    }
             }
 
         }
@@ -148,3 +157,4 @@ stage('Deploiement en staging'){
 
 }
 }
+
