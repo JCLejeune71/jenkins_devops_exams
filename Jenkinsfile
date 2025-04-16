@@ -23,8 +23,8 @@ stages {
                 steps {
                     script {
                     sh '''
-                    docker-compose -up
-					sleep 10
+                    docker-compose up
+	       	    sleep 10
                     '''
                     }
                 }
