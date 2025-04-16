@@ -80,11 +80,11 @@ stages {
                 cp charts/cast-service/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app castservice --values=values.yml --namespace dev
+                helm upgrade --install app JCLejeune71/castservice --values=values.yml --namespace dev
                 cp charts/movie-service/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app movieservice --values=values.yml --namespace dev
+                helm upgrade --install app JCLejeune71/movieservice --values=values.yml --namespace dev
                 '''
                 }
             }
