@@ -1,8 +1,8 @@
 pipeline {
 environment { 
 DOCKER_ID = "jclejeune71" 
-DOCKER_IMAGE_CAST = "cast-service"
-DOCKER_IMAGE_MOVIE = "movie-service"
+DOCKER_IMAGE_CAST = "castservice"
+DOCKER_IMAGE_MOVIE = "movieservice"
 DOCKER_TAG = "v.${BUILD_ID}.0" 
 }
 agent any // Jenkins will be able to select all available agents
