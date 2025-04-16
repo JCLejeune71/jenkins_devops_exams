@@ -79,9 +79,12 @@ stages {
                 cat $KUBECONFIG > .kube/config
 				cd charts
                 cp castservice/values.yaml values.yml
-                cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app ./castservice --values=values.yml --namespace dev
+                cat values.yml
+				echo ********************
+				pwd
+				echo *********************                
+				helm upgrade --install app ./castservice --values=values.yml --namespace dev
                 cp movieservice/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
@@ -104,7 +107,6 @@ stages {
                 ls
                 cat $KUBECONFIG > .kube/config
                 cp charts/castservice/values.yaml values.yml
-                cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
                 helm upgrade --install app castservice --values=values.yml --namespace qa
                 cp charts/movieservice/values.yaml values.yml
