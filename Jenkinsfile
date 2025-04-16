@@ -1,7 +1,7 @@
 pipeline {
 environment { 
 DOCKER_ID = "jclejeune71" 
-DOCKER_IMAGE = "Jenkins_devops_exams"
+DOCKER_IMAGE = "jenkins_devops_exams"
 DOCKER_TAG = "v.${BUILD_ID}.0" 
 }
 agent any // Jenkins will be able to select all available agents
